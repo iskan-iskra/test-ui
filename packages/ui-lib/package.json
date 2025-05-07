@@ -5,9 +5,8 @@
   "types": "dist/my-ui-lib.d.ts",
   "scripts": {
     "build": "vite build",
-    "prepublishOnly": "npm run build",
-    "release": "standard-version",
-    "publish": "bun publish --access public"
+    "prepublishOnly": "bun run build",
+    "release": "standard-version"
   },
   "publishConfig": {
     "access": "public"

@@ -38,9 +38,9 @@ jobs:
           cd packages/ui-lib  # Переходим в папку с библиотекой
           bun run build  # Собираем библиотеку
 
-      - name: Publish to NPM
+      - name: Publish the build to NPM
         run: |
           cd packages/ui-lib  # Переходим в папку с библиотекой
-          bunx publish --access public  # Публикуем на NPM
+          bunx publish dist --access public  # Публикуем только папку dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Используем секретный токен для авторизации
