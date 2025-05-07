@@ -1,0 +1,36 @@
+name: Publish Library to NPM
+
+on:
+  push:
+    branches:
+      - master # Публикуем на NPM при пуше в ветку master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest # Действия будут выполняться на сервере Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # Скачиваем исходный код репозитория
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1 # Устанавливаем Bun
+        with:
+          bun-version: 'latest' # Устанавливаем последнюю версию Bun
+
+      - name: Install dependencies with Bun
+        run: |
+          cd packages/ui-lib  # Переходим в папку с библиотекой
+          bun install  # Устанавливаем все зависимости библиотеки
+
+      - name: Build the library
+        run: |
+          cd packages/ui-lib  # Переходим в папку с библиотекой
+          bun run build  # Собираем библиотеку
+
+      - name: Publish to NPM
+        run: |
+          cd packages/ui-lib  # Переходим в папку с библиотекой
+          bunx publish --access public  # Публикуем на NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,10 +1,19 @@
 {
-  "name": "ui-lib",
-  "module": "index.ts",
-  "type": "module",
+  "name": "my-ui-lib",
+  "version": "1.0.0",
+  "main": "dist/my-ui-lib.umd.js",
+  "types": "dist/my-ui-lib.d.ts",
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "npm run build",
+    "publish": "bun publish --access public"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
-    "@types/bun": "latest",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.8.3"
