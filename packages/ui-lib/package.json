@@ -1,5 +1,5 @@
 {
-  "name": "my-ui-lib",
+  "name": "iskan-test-ui-lib",
   "version": "1.0.0",
   "main": "dist/my-ui-lib.umd.js",
   "types": "dist/my-ui-lib.d.ts",
