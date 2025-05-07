@@ -6,7 +6,7 @@ on:
       - master # Публикуем на NPM при пуше в ветку master
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest # Действия будут выполняться на сервере Ubuntu
 
     steps:
@@ -18,10 +18,15 @@ jobs:
         with:
           bun-version: 'latest' # Устанавливаем последнюю версию Bun
 
-      - name: Install dependencies with Bun
+      - name: Install dependencies
         run: |
           cd packages/ui-lib  # Переходим в папку с библиотекой
           bun install  # Устанавливаем все зависимости библиотеки
+
+      - name: Update version with standard-version
+        run: |
+          cd packages/ui-lib  # Переходим в папку с библиотекой
+          bun run release  # Обновляем версию с помощью standard-version
 
       - name: Build the library
         run: |
@@ -33,4 +38,4 @@ jobs:
           cd packages/ui-lib  # Переходим в папку с библиотекой
           bunx publish --access public  # Публикуем на NPM
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Используем секретный токен для авторизации
