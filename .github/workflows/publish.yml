@@ -44,9 +44,9 @@ jobs:
           cd packages/ui-lib  # Переходим в папку с библиотекой
           bun run build  # Собираем библиотеку
 
-      - name: Publish the dist folder to NPM
+      - name: Publish the folder to NPM
         run: |
           cd packages/ui-lib  # Переходим в папку с библиотекой
-          npm publish dist --access public  # Публикуем только содержимое папки dist
+          npm publish --access public  # Публикуем только содержимое папки dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Используем токен из GitHub Secrets
