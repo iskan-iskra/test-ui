@@ -6,12 +6,16 @@ export default defineConfig({
       entry: 'index.ts',
       name: 'MyUiLib',
       formats: ['es', 'umd'],
-
       fileName: 'my-ui-lib',
     },
-    outDir: 'dist', // Указываем папку, куда будут собираться файлы
     rollupOptions: {
-      external: ['lit'],
+      external: ['lit'], // Внешний зависимый модуль (lit)
+      output: {
+        globals: {
+          lit: 'lit', // Указываем, что будет использован глобальный `lit`
+        },
+      },
     },
+    sourcemap: true,
   },
 });
