@@ -23,6 +23,12 @@ jobs:
           cd packages/ui-lib  # Переходим в папку с библиотекой
           bun install  # Устанавливаем все зависимости библиотеки
 
+      - name: Setup Node.js for npm
+        uses: actions/setup-node@v3 # Устанавливаем Node.js для работы с npm
+        with:
+          node-version: '20.x' # Устанавливаем нужную версию Node.js
+          registry-url: 'https://registry.npmjs.org' # Указываем npm registry
+
       - name: Setup Git config for committer
         run: |
           git config --global user.name "GitHub Actions"
@@ -41,6 +47,6 @@ jobs:
       - name: Publish the build to NPM
         run: |
           cd packages/ui-lib  # Переходим в папку с библиотекой
-          bunx publish dist --access public  # Публикуем только папку dist
+          npm publish --access public  # Публикуем на NPM
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Используем секретный токен для авторизации
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Используем токен из GitHub Secrets
